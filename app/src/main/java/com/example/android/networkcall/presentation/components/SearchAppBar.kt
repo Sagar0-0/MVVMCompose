@@ -11,8 +11,10 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.graphics.Color
@@ -21,8 +23,10 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.android.networkcall.presentation.ui.recipe_list.FoodCategory
 import com.example.android.networkcall.presentation.ui.recipe_list.getAllFoodCategories
+import kotlinx.coroutines.NonDisposableHandle.parent
 
 @Composable
 fun SearchAppBar(
@@ -33,11 +37,11 @@ fun SearchAppBar(
     categories: List<FoodCategory>,
     selectedCategory: FoodCategory?,
     onSelectedCategoryChanged: (String) -> Unit,
+    onToggleTheme: ()->Unit
 ) {
     Surface(
         modifier = Modifier
             .fillMaxWidth(),
-        color = Color.White,
         elevation = 8.dp,
     ) {
         Column(Modifier.fillMaxWidth()) {
@@ -72,6 +76,22 @@ fun SearchAppBar(
                         )
                     }
                 )
+                ConstraintLayout(
+                    modifier = Modifier.align(Alignment.CenterVertically)
+                ) {
+                    val (menu) = createRefs()
+                    IconButton(
+                        modifier = Modifier
+                            .constrainAs(menu) {
+                                end.linkTo(parent.end)
+                                linkTo(top = parent.top, bottom = parent.bottom)
+                            },
+                        onClick = onToggleTheme
+                        ,
+                    ){
+                        Icon(imageVector =Icons.Filled.MoreVert, contentDescription = "")
+                    }
+                }
             }
             LazyRow(
                 modifier = Modifier

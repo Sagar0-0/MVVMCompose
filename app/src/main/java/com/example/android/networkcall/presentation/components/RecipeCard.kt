@@ -27,15 +27,12 @@ fun RecipeCard(
     Card(
         shape = MaterialTheme.shapes.small,
         modifier = Modifier
-            .padding(
-                bottom = 6.dp,
-                top = 6.dp
-            )
+            .padding(7.dp)
             .fillMaxWidth()
             .clickable(onClick = onClick),
         elevation = 8.dp
     ) {
-        Column() {
+        Column {
             recipe.featuredImage?.let { url ->
                 val image= loadPicture(url = url, defaultImage = DEFAULT_RECIPE_IMAGE).value
                 if (image != null) {
