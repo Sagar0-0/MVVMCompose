@@ -47,6 +47,7 @@ constructor(
 
 
     init {
+
         savedStateHandle.get<Int>(STATE_KEY_PAGE)?.let { p ->
             Log.d(TAG, "restoring page: $p")
             setPage(p)

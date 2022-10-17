@@ -53,7 +53,9 @@ fun RecipeList(
                         recipe = recipe,
                         onClick = {
                             if (recipe.id != null) {
-                                val action=RecipeListFragmentDirections.actionRecipeListFragmentToRecipeFragment(recipe.id)
+                                val action=RecipeListFragmentDirections
+                                    .actionRecipeListFragmentToRecipeFragment(
+                                    recipe=recipe)
                                 navController.navigate(action)
                             } else {
                                 coroutineScope.launch {
